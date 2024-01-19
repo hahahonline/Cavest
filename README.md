@@ -16,7 +16,6 @@ Funcionalidades
     Ambiente virtual (recomendado)
 
 # Instalação
-
     Clone o repositório:
 
     git clone https://github.com/seu_usuario/nome-do-projeto.git
@@ -40,7 +39,6 @@ Funcionalidades
     pip install -r requirements.txt
 
 # Utilização
-
     Execute o app:
 
     python main.py
