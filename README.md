@@ -2,7 +2,8 @@
 
 
 Bem-vindo à Calculadora de Investimentos, uma aplicação simples para análise de investimentos em ações. A calculadora permite calcular métricas como Yield on Cost, Preço Teto e Preço Justo.
-Funcionalidades
+
+# Funcionalidades
 
     Yield on Cost (YOC): Calcula a média do dividend yield (últimos 5 anos) dividido pelo preço atual da ação.
 
