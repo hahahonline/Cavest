@@ -17,7 +17,7 @@ class CalculadoraInvestimentos:
         self.entry_vpa = Entry(root)
         self.entry_porcentagem_minima_yield = Entry(root)
         self.resultado_text = Label(root, text="")
-        self.resultado_text.grid(row=4, column=0, columnspan=2, pady=10)
+        self.resultado_text.pack()
 
         self.exibir_tela_principal()
 
@@ -33,17 +33,19 @@ class CalculadoraInvestimentos:
 
     def ocultar_widgets(self):
         for widget in self.root.winfo_children():
-            widget.grid_remove()
+            widget.pack_forget()
+
+
 
     def exibir_tela_principal(self):
         self.root.title("Calculadora de Investimentos")
         self.ocultar_widgets()
 
-        Label(self.root, text="Escolha uma operação:").grid(row=0, column=10, pady=10)
+        Label(self.root, text="Escolha uma operação:").pack(pady=10)
 
-        Button(self.root, text="Yield on Cost", command=self.exibir_tela_yoc).grid(row=1, column=10, pady=5)
-        Button(self.root, text="Preço Teto", command=self.exibir_tela_preco_teto).grid(row=2, column=10, pady=5)
-        Button(self.root, text="Preço Justo", command=self.exibir_tela_preco_justo).grid(row=3, column=10, pady=5)
+        Button(self.root, text="Yield on Cost", command=self.exibir_tela_yoc).pack(pady=5)
+        Button(self.root, text="Preço Teto", command=self.exibir_tela_preco_teto).pack(pady=5)
+        Button(self.root, text="Preço Justo", command=self.exibir_tela_preco_justo).pack(pady=5)
 
     def centralizar_na_tela(self, widget):
         widget.update_idletasks()
@@ -57,58 +59,58 @@ class CalculadoraInvestimentos:
         self.root.title("Yield on Cost")
         self.ocultar_widgets()
 
-        Label(self.root, text="Média do Dividend Yield (últimos 5 anos):").grid(row=0, column=0, pady=10)
-        self.entry_media_dividend_yield.grid(row=0, column=1, pady=10, sticky="ew")
+        Label(self.root, text="Média do Dividend Yield (últimos 5 anos):").pack(pady=10)
+        self.entry_media_dividend_yield.pack(pady=10)
 
-        Label(self.root, text="Preço da Ação:").grid(row=1, column=0, pady=10)
-        self.entry_preco_acao.grid(row=1, column=1, pady=10, sticky="ew")
+        Label(self.root, text="Preço da Ação:").pack(pady=10)
+        self.entry_preco_acao.pack(pady=10)
 
-        Button(self.root, text="Calcular", command=self.calcular_e_exibir_resultados_yoc).grid(row=2, column=0, columnspan=2, pady=10)
-        Button(self.root, text="Voltar", command=self.exibir_tela_principal).grid(row=3, column=0, columnspan=2, pady=5)
+        Button(self.root, text="Calcular", command=self.calcular_e_exibir_resultados_yoc).pack(pady=10)
+        Button(self.root, text="Voltar", command=self.exibir_tela_principal).pack(pady=5)
 
         # Centralizar na tela após os widgets terem sido colocados
         self.centralizar_na_tela(self.root)
        
     def calcular_e_exibir_resultados_yoc(self):
-        self.resultado_text.config(text=self.calcular_yoc())
-        self.resultado_text.grid(row=4, column=0, columnspan=2, pady=10)
+        self.resultado_text.config(text=self.calcular_yoc(), bg='yellow', fg='black', font=('Roboto', 14))
+        self.resultado_text.pack(pady=10)
 
     def exibir_tela_preco_teto(self):
         self.root.title("Preço Teto")
         self.ocultar_widgets()
 
-        Label(self.root, text="Média dos dividendos (últimos 5 anos):").grid(row=0, column=0)
-        self.entry_media_dividend_yield.grid(row=0, column=1)
+        Label(self.root, text="Média dos dividendos (últimos 5 anos):").pack()
+        self.entry_media_dividend_yield.pack()
 
-        Label(self.root, text="Porcentagem mínima de Dividend Yield (recomendado 6 ou 7%):").grid(row=1, column=0)
-        self.entry_porcentagem_minima_yield.grid(row=1, column=1)
+        Label(self.root, text="Porcentagem mínima de Dividend Yield (recomendado 6 ou 7%):").pack()
+        self.entry_porcentagem_minima_yield.pack()
 
-        Button(self.root, text="Calcular", command=self.calcular_e_exibir_resultados_preco_teto).grid(row=2, column=0, columnspan=2, pady=10)
-        Button(self.root, text="Voltar", command=self.exibir_tela_principal).grid(row=3, column=0, columnspan=2, pady=5)
+        Button(self.root, text="Calcular", command=self.calcular_e_exibir_resultados_preco_teto).pack(pady=10)
+        Button(self.root, text="Voltar", command=self.exibir_tela_principal).pack(pady=5)
 
     def calcular_e_exibir_resultados_preco_teto(self):
-        self.resultado_text.config(text=self.calcular_preco_teto())
-        self.resultado_text.grid(row=4, column=0, columnspan=2, pady=10)
+        self.resultado_text.config(text=self.calcular_preco_teto(), bg='yellow', fg='black', font=('Roboto', 14))
+        self.resultado_text.pack(pady=10)
 
     def exibir_tela_preco_justo(self):
         self.root.title("Preço Justo")
         self.ocultar_widgets()
 
-        Label(self.root, text="Preço da Ação:").grid(row=0, column=0)
-        self.entry_preco_acao.grid(row=0, column=1)
+        Label(self.root, text="Preço da Ação:").pack()
+        self.entry_preco_acao.pack()
 
-        Label(self.root, text="Lucro por Ação (LPA):").grid(row=1, column=0)
-        self.entry_lpa.grid(row=1, column=1)
+        Label(self.root, text="Lucro por Ação (LPA):").pack()
+        self.entry_lpa.pack()
 
-        Label(self.root, text="Valor Patrimonial por Ação (VPA):").grid(row=2, column=0)
-        self.entry_vpa.grid(row=2, column=1)
+        Label(self.root, text="Valor Patrimonial por Ação (VPA):").pack()
+        self.entry_vpa.pack()
 
-        Button(self.root, text="Calcular", command=self.calcular_e_exibir_resultados_preco_justo).grid(row=3, column=0, columnspan=2, pady=10)
-        Button(self.root, text="Voltar", command=self.exibir_tela_principal).grid(row=4, column=0, columnspan=2, pady=5)
+        Button(self.root, text="Calcular", command=self.calcular_e_exibir_resultados_preco_justo).pack(pady=10)
+        Button(self.root, text="Voltar", command=self.exibir_tela_principal).pack(pady=5)
 
     def calcular_e_exibir_resultados_preco_justo(self):
-        self.resultado_text.config(text=self.calcular_preco_justo())
-        self.resultado_text.grid(row=5, column=0, columnspan=2, pady=10)
+        self.resultado_text.config(text=self.calcular_preco_justo(), bg='yellow', fg='black', font=('Roboto', 14))
+        self.resultado_text.pack(pady=10)
 
     def calcular_yoc(self):
         if self.is_float(self.entry_media_dividend_yield.get()) and self.is_float(self.entry_preco_acao.get()):
