@@ -1,6 +1,7 @@
 import math
 import tkinter as tk
 from tkinter import Label, Entry, Button
+from YOC import calcular_yoc
 
 class CalculadoraInvestimentos:
     def __init__(self, root):
@@ -43,9 +44,19 @@ class CalculadoraInvestimentos:
 
         Label(self.root, text="Escolha uma operação:").pack(pady=10)
 
+        #Button(self.root, text="Automático", command=self.exibir_tela_automatico).pack(pady=5)
+        Button(self.root, text="Manual", command=self.exibir_tela_manual).pack(pady=5)
+
+    def exibir_tela_manual(self):
+        self.root.title("Calculadora de Investimentos")
+        self.ocultar_widgets()
+
+        Label(self.root, text="Escolha uma operação:").pack(pady=10)
+
         Button(self.root, text="Yield on Cost", command=self.exibir_tela_yoc).pack(pady=5)
         Button(self.root, text="Preço Teto", command=self.exibir_tela_preco_teto).pack(pady=5)
         Button(self.root, text="Preço Justo", command=self.exibir_tela_preco_justo).pack(pady=5)
+        Button(self.root, text="Voltar", command=self.exibir_tela_principal).pack(pady=5)
 
     def centralizar_na_tela(self, widget):
         widget.update_idletasks()
@@ -66,7 +77,7 @@ class CalculadoraInvestimentos:
         self.entry_preco_acao.pack(pady=10)
 
         Button(self.root, text="Calcular", command=self.calcular_e_exibir_resultados_yoc).pack(pady=10)
-        Button(self.root, text="Voltar", command=self.exibir_tela_principal).pack(pady=5)
+        Button(self.root, text="Voltar", command=self.exibir_tela_manual).pack(pady=5)
 
         # Centralizar na tela após os widgets terem sido colocados
         self.centralizar_na_tela(self.root)
@@ -86,7 +97,7 @@ class CalculadoraInvestimentos:
         self.entry_porcentagem_minima_yield.pack()
 
         Button(self.root, text="Calcular", command=self.calcular_e_exibir_resultados_preco_teto).pack(pady=10)
-        Button(self.root, text="Voltar", command=self.exibir_tela_principal).pack(pady=5)
+        Button(self.root, text="Voltar", command=self.exibir_tela_manual).pack(pady=5)
 
     def calcular_e_exibir_resultados_preco_teto(self):
         self.resultado_text.config(text=self.calcular_preco_teto(), bg='yellow', fg='black', font=('Roboto', 14))
@@ -106,7 +117,7 @@ class CalculadoraInvestimentos:
         self.entry_vpa.pack()
 
         Button(self.root, text="Calcular", command=self.calcular_e_exibir_resultados_preco_justo).pack(pady=10)
-        Button(self.root, text="Voltar", command=self.exibir_tela_principal).pack(pady=5)
+        Button(self.root, text="Voltar", command=self.exibir_tela_manual).pack(pady=5)
 
     def calcular_e_exibir_resultados_preco_justo(self):
         self.resultado_text.config(text=self.calcular_preco_justo(), bg='yellow', fg='black', font=('Roboto', 14))
@@ -139,6 +150,8 @@ class CalculadoraInvestimentos:
             return f'Preço Justo: R${self.formatar_valor(preco_justo)}'
         else:
             return "Entradas inválidas"
+    
+    
 
 # Criando a janela principal
 root = tk.Tk()
